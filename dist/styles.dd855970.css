@@ -32,12 +32,20 @@ h1 {
   text-align: center;
 }
 
-tr:nth-child(even) {
+tr.default:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-tr:nth-child(odd) {
+tr.default:nth-child(odd) {
   background-color: #ffffff;
+}
+
+.green {
+  background-color: #abffbd;
+}
+
+.red {
+  background-color: #ff9e9e;
 }
 
 

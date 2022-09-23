@@ -192,6 +192,14 @@ function initializeCode() {
                 tr.appendChild(td3);
                 tr.appendChild(td4);
                 datasetTable.appendChild(tr);
+
+                if (employmentArray[i] / populationArray[i] * 100 > 45) {
+                  tr.classList.add("green");
+                } else if (employmentArray[i] / populationArray[i] * 100 < 25) {
+                  tr.classList.add("red");
+                } else {
+                  tr.classList.add("default");
+                }
               }
 
             case 19:
