@@ -145,7 +145,7 @@ function initializeCode() {
 
   function _getDataset() {
     _getDataset = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var url, datasetPromise, datasetJSON, i, tr, td1, td2;
+      var url, datasetPromise, datasetJSON, arrayLength, i, tr, td1, td2;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -161,10 +161,9 @@ function initializeCode() {
 
             case 6:
               datasetJSON = _context.sent;
-              console.log(Object.values(datasetJSON.dataset.dimension.Alue.category.label));
-              console.log(Object.values(datasetJSON.dataset.value));
+              arrayLength = Object.values(datasetJSON.dataset.dimension.Alue.category.label).length;
 
-              for (i = 0; i < 310; i++) {
+              for (i = 0; i < arrayLength; i++) {
                 tr = document.createElement("tr");
                 td1 = document.createElement("td");
                 td2 = document.createElement("td");
@@ -175,7 +174,7 @@ function initializeCode() {
                 datasetTable.appendChild(tr);
               }
 
-            case 10:
+            case 9:
             case "end":
               return _context.stop();
           }
