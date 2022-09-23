@@ -15,13 +15,11 @@ function initializeCode() {
       "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
     const datasetPromise = await fetch(url);
     const datasetJSON = await datasetPromise.json();
+    const arrayLength = Object.values(
+      datasetJSON.dataset.dimension.Alue.category.label
+    ).length;
 
-    console.log(
-      Object.values(datasetJSON.dataset.dimension.Alue.category.label)
-    );
-    console.log(Object.values(datasetJSON.dataset.value));
-
-    for (var i = 0; i < 310; i++) {
+    for (var i = 0; i < arrayLength; i++) {
       let tr = document.createElement("tr");
       let td1 = document.createElement("td");
       let td2 = document.createElement("td");
