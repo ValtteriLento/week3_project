@@ -126,49 +126,66 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var datasetsTable = document.getElementById("datasets");
-
-function getDatasets() {
-  return _getDatasets.apply(this, arguments);
+if (document.readyState !== "loading") {
+  console.log("Document is ready!");
+  initializeCode();
+} else {
+  document.addEventListener("DOMContentLoaded", function () {
+    console.log("Document is ready after waiting!");
+    initializeCode();
+  });
 }
 
-function _getDatasets() {
-  _getDatasets = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-    var url, datasetsPromise, datasetsJSON;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            url = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
-            _context.next = 3;
-            return fetch(url);
+function initializeCode() {
+  var datasetTable = document.getElementById("dataset");
 
-          case 3:
-            datasetsPromise = _context.sent;
-            _context.next = 6;
-            return datasetsPromise.json();
+  function getDataset() {
+    return _getDataset.apply(this, arguments);
+  }
 
-          case 6:
-            datasetsJSON = _context.sent;
-            datasetsJSON.forEach(function (dataset) {
-              var tr = document.createElement("tr");
-              var td1 = document.createElement("td");
-              var td2 = document.createElement("td");
-              td1.innerText = dataset.dimension.Alue.category.label;
-              td2.innerText = dataset.value;
-              tr.appendChild(td1);
-              tr.appendChild(td2);
-              datasetsTable.appendChild(tr);
-            });
+  function _getDataset() {
+    _getDataset = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var url, datasetPromise, datasetJSON, i, tr, td1, td2;
+      return _regeneratorRuntime().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              url = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
+              _context.next = 3;
+              return fetch(url);
 
-          case 8:
-          case "end":
-            return _context.stop();
+            case 3:
+              datasetPromise = _context.sent;
+              _context.next = 6;
+              return datasetPromise.json();
+
+            case 6:
+              datasetJSON = _context.sent;
+              console.log(Object.values(datasetJSON.dataset.dimension.Alue.category.label));
+              console.log(Object.values(datasetJSON.dataset.value));
+
+              for (i = 0; i < 310; i++) {
+                tr = document.createElement("tr");
+                td1 = document.createElement("td");
+                td2 = document.createElement("td");
+                td1.innerText = Object.values(datasetJSON.dataset.dimension.Alue.category.label)[i];
+                td2.innerText = Object.values(datasetJSON.dataset.value)[i];
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                datasetTable.appendChild(tr);
+              }
+
+            case 10:
+            case "end":
+              return _context.stop();
+          }
         }
-      }
-    }, _callee);
-  }));
-  return _getDatasets.apply(this, arguments);
+      }, _callee);
+    }));
+    return _getDataset.apply(this, arguments);
+  }
+
+  getDataset();
 }
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -198,7 +215,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33197" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46199" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
