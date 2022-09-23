@@ -145,36 +145,56 @@ function initializeCode() {
 
   function _getDataset() {
     _getDataset = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-      var url, datasetPromise, datasetJSON, arrayLength, i, tr, td1, td2;
+      var url1, url2, datasetPromise1, datasetJSON1, datasetPromise2, datasetJSON2, municipalityArray, populationArray, employmentArray, arrayLength, i, tr, td1, td2, td3, td4;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              url = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
-              _context.next = 3;
-              return fetch(url);
+              url1 = "https://statfin.stat.fi/PxWeb/sq/4e244893-7761-4c4f-8e55-7a8d41d86eff";
+              url2 = "https://statfin.stat.fi/PxWeb/sq/5e288b40-f8c8-4f1e-b3b0-61b86ce5c065";
+              _context.next = 4;
+              return fetch(url1);
 
-            case 3:
-              datasetPromise = _context.sent;
-              _context.next = 6;
-              return datasetPromise.json();
+            case 4:
+              datasetPromise1 = _context.sent;
+              _context.next = 7;
+              return datasetPromise1.json();
 
-            case 6:
-              datasetJSON = _context.sent;
-              arrayLength = Object.values(datasetJSON.dataset.dimension.Alue.category.label).length;
+            case 7:
+              datasetJSON1 = _context.sent;
+              _context.next = 10;
+              return fetch(url2);
+
+            case 10:
+              datasetPromise2 = _context.sent;
+              _context.next = 13;
+              return datasetPromise2.json();
+
+            case 13:
+              datasetJSON2 = _context.sent;
+              municipalityArray = Object.values(datasetJSON1.dataset.dimension.Alue.category.label);
+              populationArray = Object.values(datasetJSON1.dataset.value);
+              employmentArray = Object.values(datasetJSON2.dataset.value);
+              arrayLength = municipalityArray.length;
 
               for (i = 0; i < arrayLength; i++) {
                 tr = document.createElement("tr");
                 td1 = document.createElement("td");
                 td2 = document.createElement("td");
-                td1.innerText = Object.values(datasetJSON.dataset.dimension.Alue.category.label)[i];
-                td2.innerText = Object.values(datasetJSON.dataset.value)[i];
+                td3 = document.createElement("td");
+                td4 = document.createElement("td");
+                td1.innerText = municipalityArray[i];
+                td2.innerText = populationArray[i];
+                td3.innerText = employmentArray[i];
+                td4.innerText = (employmentArray[i] / populationArray[i] * 100).toFixed(2) + "%";
                 tr.appendChild(td1);
                 tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
                 datasetTable.appendChild(tr);
               }
 
-            case 9:
+            case 19:
             case "end":
               return _context.stop();
           }
